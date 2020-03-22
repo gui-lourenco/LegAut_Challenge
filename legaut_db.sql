@@ -16,6 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `busca`
+--
+
+DROP TABLE IF EXISTS `busca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `busca` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cpf` varchar(11) NOT NULL,
+  `search_key` char(1) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `link` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cpf` (`cpf`),
+  CONSTRAINT `busca_ibfk_1` FOREIGN KEY (`cpf`) REFERENCES `cliente` (`cpf`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `busca`
+--
+
+LOCK TABLES `busca` WRITE;
+/*!40000 ALTER TABLE `busca` DISABLE KEYS */;
+/*!40000 ALTER TABLE `busca` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `cliente`
 --
 
@@ -29,8 +57,6 @@ CREATE TABLE `cliente` (
   `rg` varchar(9) NOT NULL,
   `email` varchar(100) NOT NULL,
   `foto` varchar(50) NOT NULL,
-  `titulo_pesquisa` varchar(100) NOT NULL,
-  `url_pesquisa` varchar(150) NOT NULL,
   PRIMARY KEY (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-21 19:26:14
+-- Dump completed on 2020-03-22 16:51:02

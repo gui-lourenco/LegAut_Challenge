@@ -3,13 +3,16 @@ from django.contrib.auth.models import User
 
 class Client(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    cpf = models.CharField(max_length=11)
     name = models.CharField(max_length=100)
+    cpf = models.CharField(max_length=11, unique=True)
     rg = models.CharField(max_length=9)
-    adress = models.CharField(max_length=200)
-    contact = models.CharField(max_length=11)
+    birth = models.DateField(null=True)
+    address = models.CharField(max_length=200)
+    phone = models.CharField(max_length=11)
     email = models.CharField(max_length=150)
-    # photo = models.CharField(max_length=100)
+    sex = models.CharField(max_length=1, null=True)
+    marital_status = models.CharField(max_length=20, null=True)
+    profile_pic = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -17,6 +20,7 @@ class Client(models.Model):
 class Contract(models.Model):
     client_cpf = models.ForeignKey(Client, on_delete=models.CASCADE)
     description = models.CharField(max_length=150)
+    last_modify = models.DateTimeField(null=True)
     # file = models.CharField(max_length=100)
 
     def __str__(self):

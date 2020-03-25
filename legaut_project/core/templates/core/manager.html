@@ -1,2 +1,14 @@
-<p>i am a boss: {{username}}</p>
-<a href="{% url 'core:logout' %}">logout</a>
+{% extends 'core/managerBase.html' %}
+{% block title %} LegAut Plataform {% endblock %}
+{% block user %} {{username.first_name}} {% endblock %}
+{% block page %}
+<div class="container">
+    <h2>Clientes</h2>
+    <div class="list-group">
+    {% for client in clients%}
+        <a href="{% url 'core:userDetail' user=client.cpf %}" class="list-group-item list-group-item-action">{{client.name}}</a>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

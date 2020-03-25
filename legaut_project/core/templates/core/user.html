@@ -1,4 +1,8 @@
-<h2>{{username}}</h2>
+{% load static %}
+<h2>{{user.name}}</h2>
+<div>
+    <img src={{user.profile_pic.url}} alt="photo">
+</div>
 {% for contract in contracts %}
     <p>{{contract.description}}</p>
 {% endfor %}

@@ -1,0 +1,186 @@
+{% extends 'core/managerBase.html' %}
+{% load static %}
+
+{% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+{% endblock %}
+
+{% block title %} {{user.client.name}} {% endblock %}
+{% block user %} {{request.user.first_name}} {% endblock %}
+
+{% block page %}
+<div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="image-container">
+                                    <img src="{{user.client.profile_pic.url}}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                </div>
+                                <div class="userData ml-3">
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);"></a>{{user.client.name}}</h2>
+                                    <h6 class="d-block">{{user.client.email}}</h6>
+                                    <h6 class="d-block">{{n_cont}} contratos</h6>
+                                </div>
+                            </div>
+                            <div class="btn-group-vertical float-sm-right">
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:userSetings' user=user %}">Alterar</a></button>
+                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal"">Excluir</button>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Dados Pessoais</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Contratos</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content ml-1" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                        
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">CPF</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.cpf}}
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Data de Nascimento</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.birth}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">RG</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.rg}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Endereço</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.address}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Contato</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.phone}}
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Sexo</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.sex}}
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">Estado Civil</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{user.client.marital_status}}
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                    </div>
+                                    <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                        {% for cont in contracts %}
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">{{cont.description}}</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{cont.last_modify}}
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Deseja Excluir {{user.client.name}}?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                Caso exclua {{user.client.name}}, não há como recuperar as informações.
+                Você tem certeza?
+              </div>
+              
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Excluir" name='del'>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    {% endblock %}

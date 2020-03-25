@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Client(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     cpf = models.CharField(max_length=11)
     name = models.CharField(max_length=100)
     rg = models.CharField(max_length=9)

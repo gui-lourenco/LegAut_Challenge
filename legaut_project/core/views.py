@@ -23,9 +23,10 @@ def loginPage(request):
     return render(request, 'core/login.html', context)
 
 def userPage(request):
-    user = get_object_or_404(Client, cpf=request.user)
+    # user = get_object_or_404(Client, cpf=request.user)
+    user = request.user.client
     contract_list = user.contract_set.all()
-    context = {'username':request.user, 'contracts':contract_list}
+    context = {'username':user.name, 'contracts':contract_list}
     return render(request, 'core/user.html', context)
 
 def managerPage(request):

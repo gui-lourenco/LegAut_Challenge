@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import *
 # from django.contrib.auth.form import UserCreationForm
 
@@ -31,3 +31,7 @@ def userPage(request):
 def managerPage(request):
     context = {'username':request.user}
     return render(request, 'core/manager.html', context)
+
+def logoutPage(request):
+    logout(request)
+    return redirect('core:home')

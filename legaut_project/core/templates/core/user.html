@@ -2,3 +2,5 @@
 {% for contract in contracts %}
     <p>{{contract.description}}</p>
 {% endfor %}
+
+<a href="{% url 'core:logout' %}">logout</a>

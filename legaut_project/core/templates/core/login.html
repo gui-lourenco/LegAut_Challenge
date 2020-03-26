@@ -1,31 +1,42 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Login</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static '/css/login.css' %}" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+  </head>
+  <body>
 
-<div class="container mt-4">
-  <h2>Login</h2>
-  <form method="POST" action="">
-      {% csrf_token %}
-    <div class="form-group">
-      <label for="cpf">CPF:</label>
-      <input type="text" class="form-control" id="cpf" placeholder="CPF" name="username">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+    
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img src="{% static '/images/logo.png' %}" id="icon" alt="User Icon" />
+        </div>
+    
+        <!-- Login Form -->
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" id="login" class="fadeIn second" name="username" placeholder="CPF">
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="Senha">
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+    
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+    
+      </div>
     </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Senha" name="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-  </form>
-</div>
 
-</body>
+  </body>
 </html>

@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .models import *
-# from django.contrib.auth.form import UserCreationForm
+from .forms import *
+from .utility import *
+from django.contrib.auth.forms import UserCreationForm
 
 def homePage(request):
     return render(request, 'core/home.html')
@@ -17,14 +19,12 @@ def loginPage(request):
             login(request, user)
             if user.is_superuser:
                 return redirect('core:manager') 
-            #provisório (vai enviar para a pag do usuario)
             return redirect('core:user') 
 
     context = {}
     return render(request, 'core/login.html', context)
 
 def userPage(request):
-    # user = get_object_or_404(Client, cpf=request.user)
     user = request.user.client
     contract_list = user.contract_set.all()
     context = {'user':user, 'contracts':contract_list}
@@ -40,7 +40,18 @@ def logoutPage(request):
     return redirect('core:home')
 
 def userCreatePage(request):
-    return render(request, 'core/userCreate.html')
+    form = ClientForm()
+    if request.method == 'POST':
+        user = createUser(request.POST)
+        client = createClient(user, request.POST)
+        form = ClientForm(request.POST, request.FILES, instance=client)
+        
+        user.save()
+        form.save()
+        client.save()
+        return redirect('core:manager')
+    context = {'form':form}
+    return render(request, 'core/userCreate.html', context)
 
 def userSettingsPage(request, user):
     user = User.objects.get(username=user)

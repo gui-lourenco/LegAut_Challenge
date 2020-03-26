@@ -8,7 +8,7 @@ class Client(models.Model):
     rg = models.CharField(max_length=9)
     birth = models.DateField(null=True)
     address = models.CharField(max_length=200)
-    phone = models.CharField(max_length=11)
+    phone = models.CharField(max_length=15)
     email = models.CharField(max_length=150)
     sex = models.CharField(max_length=1, null=True)
     marital_status = models.CharField(max_length=20, null=True)

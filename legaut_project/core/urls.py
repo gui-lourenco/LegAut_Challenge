@@ -9,7 +9,7 @@ urlpatterns = [
     path('user/', views.userPage, name='user'),
     path('manager/', views.managerPage, name='manager'),
     path('create/', views.userCreatePage, name='userCreate'),
-    path('settings/<str:user>', views.userSettingsPage, name='userSetings'),
+    path('settings/<str:user>', views.userSettingsPage, name='userSettings'),
     path('detail/<str:user>', views.userDetailPage, name='userDetail'),
-    path('delete/<str:user>', views.userDeletePage, name='userDelete')
+    path('download/<str:file>', views.downloadPage, name='download'),
 ]

@@ -4,6 +4,7 @@
 {% block head %}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="{% static 'media/js/customModel.js' %}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
 <meta charset="utf-8">
@@ -17,7 +18,8 @@
 
 {% block title %} {{user.client.name}} {% endblock %}
 {% block user %} {{request.user.first_name}} {% endblock %}
-
+{% block form %} Adições de contratos devem ser 
+feitas apenas na página principal {% endblock %}
 {% block page %}
 <div class="container">
         <div class="row">
@@ -26,7 +28,7 @@
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="btn-group-vertical float-sm-right">
-                                <button type="button" class="btn btn-light"><a href="{% url 'core:userSetings' user=user %}">Alterar</a></button>
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:userSettings' user=user %}">Alterar</a></button>
                                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#del"">Excluir</button>
                             </div> 
                             
@@ -35,7 +37,7 @@
                                     {% if user.client.profile_pic %}
                                     <img src="{{user.client.profile_pic.url}}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     {% else %}
-                                    <img src="{% static '/images/profile-default-pic.png' %}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <img src="{% static 'media/images/profile-default-pic.png' %}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     {% endif %}
                                 </div>
                                 <div class="userData ml-3">
@@ -54,6 +56,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="contracts-tab" data-toggle="tab" href="#contracts" role="tab" aria-controls="contracts" aria-selected="false">Contratos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="buscas-tab" data-toggle="tab" href="#buscas" role="tab" aria-controls="contracts" aria-selected="false">Buscas</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content ml-1" id="myTabContent">
@@ -139,19 +144,39 @@
                                             <div class="col-md-8 col-6">
                                                 {{cont.last_modify}}
                                             </div>
+                                            <div>
+                                                <a href="{% url 'core:download' file=cont.id %}">Baixar</a>
+                                                <a href="">Excluir</a>
+                                            </div>
                                         </div>
                                         {% empty %}
                                             <p >{{user.client.name}} não tem contratos</p>
                                         <hr />
+                                        
+                                        {% endfor %}
+                                    </div>
+                                    <div class="tab-pane fade" id="buscas" role="tabpanel" aria-labelledby="buscas-tab">
+                                        {% for search in searchs %}
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 col-5">
+                                                <label style="font-weight:bold;">{{search.title}}</label>
+                                            </div>
+                                            <div class="col-md-8 col-6">
+                                                {{search.link}}
+                                            </div>
+                                            <div class="col-sm-3 col-7">
+                                                {{search.search_key}}
+                                            </div>
+                                        </div>
+                                        {% empty %}
+                                            <p >{{user.client.name}} não tem resultados de busca!</p>
+                                        <hr />
+                                        
                                         {% endfor %}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -189,5 +214,4 @@
         </div>
         
       </div>
-      
-    {% endblock %}
+{% endblock %}

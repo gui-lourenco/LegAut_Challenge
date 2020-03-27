@@ -1,4 +1,5 @@
 from django.db import models
+# from legaut_project.settings import FILE_ROOT
 from django.contrib.auth.models import User
 
 class Client(models.Model):
@@ -12,7 +13,7 @@ class Client(models.Model):
     email = models.CharField(max_length=150)
     sex = models.CharField(max_length=1, null=True)
     marital_status = models.CharField(max_length=20, null=True)
-    profile_pic = models.ImageField(null=True, blank=True)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to='images')
 
     def __str__(self):
         return self.name
@@ -20,8 +21,8 @@ class Client(models.Model):
 class Contract(models.Model):
     client_cpf = models.ForeignKey(Client, on_delete=models.CASCADE)
     description = models.CharField(max_length=150)
-    last_modify = models.DateTimeField(null=True)
-    # file = models.CharField(max_length=100)
+    last_modify = models.DateTimeField(null=True, auto_now=True)
+    file = models.FileField(null=True, upload_to='files')
 
     def __str__(self):
         return f'{self.id}-{self.client_cpf}'

@@ -12,3 +12,9 @@ class ClientAlterForm(ModelForm):
     class Meta:
         model = Client
         fields = '__all__'
+
+
+class ContractForm(ModelForm):
+    class Meta:
+        model = Contract
+        fields = '__all__'

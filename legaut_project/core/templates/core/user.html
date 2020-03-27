@@ -1,10 +1,33 @@
+{% extends 'core/userBase.html' %}
 {% load static %}
-<h2>{{user.name}}</h2>
-<div>
-    <img src={{user.profile_pic.url}} alt="photo">
-</div>
-{% for contract in contracts %}
-    <p>{{contract.description}}</p>
-{% endfor %}
-
-<a href="{% url 'core:logout' %}">logout</a>
+{% block title %} {{user.name}} {% endblock %}
+{% block user %} {{user.name}} {% endblock %}
+{% block page %}
+<div class="container"></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Arquivo</th>
+              <th>Último Upload</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for contract in contracts %}
+                <tr>
+                    <td>{{contract.description}}</td>
+                    <td><a href="{% url 'core:download' file=contract.id %}">Baixar</a></td>
+                    <td>{{contract.last_modify}}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>
+                        Você não possui contratos
+                    </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+{% endblock %}  
+  </body>
+  </html>
+  

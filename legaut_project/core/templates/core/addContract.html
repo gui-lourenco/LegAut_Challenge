@@ -1,6 +1,6 @@
 {% extends 'core/managerBase.html' %}
 {% block title %} LegAut Plataform {% endblock %}
-{% block user %} {{username.first_name}} {% endblock %}
+{% block user %} {{request.user.first_name}} {% endblock %}
 {% block head %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,26 +10,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 {% endblock %}
 
-{% block form %} {{form.as_p}} {% endblock %}
-
-{% block submit %}  
-<input type="submit" class="btn btn-danger" value="Adicionar" name='add'>
-{% endblock %}
-
 {% block page %}
 <div class="container float-sm-left">
-    <h2>Clientes:</h2>
-    {% for client in clients%}
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">{{client.name}}</h4>
-            <a href="{% url 'core:userDetail' user=client.cpf %}" class="card-link">Ver mais</a>
-          </div>
-            
-          {% empty %}
-          <h4 class="card-title">Você não tem clientes</h4>
-        </div>
-    {% endfor %}
+    {{form.as_p}}
 </div>
 
 {% endblock %}

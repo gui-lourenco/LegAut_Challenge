@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from .models import *
 from .forms import *
 from .utility import *
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+import os
 
 def homePage(request):
     return render(request, 'core/home.html')
@@ -19,7 +21,10 @@ def loginPage(request):
             login(request, user)
             if user.is_superuser:
                 return redirect('core:manager') 
+        
             return redirect('core:user') 
+        
+        messages.error(request, 'Usuário Inválido')
 
     context = {}
     return render(request, 'core/login.html', context)
@@ -32,7 +37,13 @@ def userPage(request):
 
 def managerPage(request):
     users = Client.objects.all()
-    context = {'username':request.user, 'clients':users}
+    form = ContractForm()
+    context = {'username':request.user, 'clients':users, 'form':form}
+    
+    if request.method == 'POST':
+        addContract(request)
+        return render(request, 'core/manager.html', context)
+    
     return render(request, 'core/manager.html', context)
 
 def logoutPage(request):
@@ -45,12 +56,19 @@ def userCreatePage(request):
         user = createUser(request.POST)
         client = createClient(user, request.POST)
         form = ClientForm(request.POST, request.FILES, instance=client)
+        try:
+            user.save()
+            form.save()
+            client.save()
+            messages.success(request, 'Cadastro realizado com sucesso!')
+            return redirect('core:userCreate')
+
+        except AttributeError:
+            messages.error(request, 'Falha no Cadastro! Verifique se os campos foram preenchidos corretamente')
+            context = {'form':form}
+            return redirect('core:userCreate')
         
-        user.save()
-        form.save()
-        client.save()
-        return redirect('core:manager')
-    context = {'form':form}
+    context = {'form':form, "username":request.user}
     return render(request, 'core/userCreate.html', context)
 
 def userSettingsPage(request, user):
@@ -59,16 +77,19 @@ def userSettingsPage(request, user):
 
 def userDetailPage(request, user):
     if request.method == 'POST':
-        return redirect('core:userDelete', user=user)
+        if request.POST.get('del'):
+            userDelete(user)
+            return redirect('core:manager')
 
     user = User.objects.get(username=user)
     contracts = user.client.contract_set.all()
-    context = {'user':user, 'contracts':contracts, 'n_cont': len(contracts)}
+    searchs = user.client.search_set.all()
+    context = {'user':user, 'contracts':contracts, 
+    'n_cont': len(contracts), 'searchs':searchs}
     return render(request, 'core/userDetail.html', context)
 
-def userDeletePage(request, user):
-    if request.POST.get('del') is None:
-        user = User.objects.get(username=user)
-        user.delete()
-
-    return redirect('core:manager')
+def downloadPage(request, file):
+    contract = Contract.objects.get(pk=file)
+    file = contract.file.path
+    filename = os.path.basename(contract.file.path)
+    return download_file(request, file, filename)

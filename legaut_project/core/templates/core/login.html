@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="{% static '/css/login.css' %}" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static 'media/css/login.css' %}" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -19,7 +19,7 @@
     
         <!-- Icon -->
         <div class="fadeIn first">
-          <img src="{% static '/images/logo.png' %}" id="icon" alt="User Icon" />
+          <img src="{% static 'media/images/logo.png' %}" id="icon" alt="User Icon" />
         </div>
     
         <!-- Login Form -->
@@ -32,9 +32,14 @@
     
         <!-- Remind Passowrd -->
         <div id="formFooter">
-          <a class="underlineHover" href="#">Forgot Password?</a>
+          {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
         </div>
-    
       </div>
     </div>
 

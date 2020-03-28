@@ -30,7 +30,9 @@ feitas apenas na página principal {% endblock %}
                             <div class="btn-group-vertical float-sm-right">
                                 <button type="button" class="btn btn-light"><a href="{% url 'core:managerSettings' user=user info='user' %}">Alterar login</a></button>
                                 <button type="button" class="btn btn-light"><a href="{% url 'core:managerSettings' user=user info='client' %}">Alterar cadastro</a></button>
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#del"">Excluir</button>
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:search' user=user key='nome' %}">Buscar por nome</a></button>
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:search' user=user key='cpf' %}">Buscar por CPF</a></button>
+                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#del">Excluir</button>
                             </div> 
                             
                             <div class="d-flex justify-content-start">
@@ -159,14 +161,14 @@ feitas apenas na página principal {% endblock %}
                                     <div class="tab-pane fade" id="buscas" role="tabpanel" aria-labelledby="buscas-tab">
                                         {% for search in searchs %}
                                         <div class="row">
-                                            <div class="col-sm-3 col-md-2 col-5">
-                                                <label style="font-weight:bold;">{{search.title}}</label>
-                                            </div>
                                             <div class="col-md-8 col-6">
-                                                {{search.link}}
+                                                <label style="font-weight:bold;"><a href="{{search.link}}">{{search.title}}</a></label>
                                             </div>
-                                            <div class="col-sm-3 col-7">
-                                                {{search.search_key}}
+                                            <div class="mr-3">
+                                                chave:{{search.search_key}}
+                                            </div>
+                                            <div>
+                                                {{search.last_search}}
                                             </div>
                                         </div>
                                         {% empty %}

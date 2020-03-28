@@ -40,6 +40,7 @@ class Search(models.Model):
     search_key = models.CharField(max_length=4)
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=200)
+    last_search = models.DateTimeField(null=True, auto_now=True)
 
     def __str__(self):
         return f'{self.client_cpf}-{self.title}'

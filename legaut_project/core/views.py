@@ -160,3 +160,9 @@ def downloadPage(request, file):
     file = contract.file.path
     filename = os.path.basename(contract.file.path)
     return download_file(request, file, filename)
+
+@login_required(login_url='core:login')
+def searchPage(request, user, key):
+    user = User.objects.get(username=user)
+    search(user.id, key)
+    return redirect('core:userDetail', user=user)

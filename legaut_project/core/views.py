@@ -162,6 +162,14 @@ def downloadPage(request, file):
     return download_file(request, file, filename)
 
 @login_required(login_url='core:login')
+def deleteContractPage(request, user, file):
+    user = User.objects.get(username=user)
+    contract = Contract.objects.get(pk=file)
+    os.remove(contract.file.path)
+    contract.delete()
+    return redirect('core:userDetail', user=user)
+
+@login_required(login_url='core:login')
 def searchPage(request, user, key):
     user = User.objects.get(username=user)
     search(user.id, key)

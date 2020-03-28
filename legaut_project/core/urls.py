@@ -14,5 +14,6 @@ urlpatterns = [
     path('usersettings/<str:user>/<str:info>', views.userSettingsPage, name='userSettings'),
     path('detail/<str:user>', views.userDetailPage, name='userDetail'),
     path('download/<str:file>', views.downloadPage, name='download'),
+    path('delete/<str:user>/<str:file>', views.deleteContractPage, name='delete'),
     path('search/<str:user>/<str:key>', views.searchPage, name='search'),
 ]

@@ -5,9 +5,14 @@ from .models import *
 from .forms import *
 import mimetypes
 from .crawler import *
+import os
 
 def userDelete(user):
     user = User.objects.get(username=user)
+    os.remove(user.client.profile_pic.path)
+    for cont in user.client.contract_set.all():
+        os.remove(cont.file.path)
+
     user.delete()
 
 def addContract(request):

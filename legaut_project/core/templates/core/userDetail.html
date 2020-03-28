@@ -149,7 +149,7 @@ feitas apenas na página principal {% endblock %}
                                             </div>
                                             <div>
                                                 <a href="{% url 'core:download' file=cont.id %}">Baixar</a>
-                                                <a href="">Excluir</a>
+                                                <a href="{% url 'core:delete' user=user.username file=cont.id %}">Excluir</a>
                                             </div>
                                         </div>
                                         {% empty %}

@@ -9,7 +9,7 @@ root {
   }
   
   .bg-image {
-    background-image: url('../images/home3.jpg');
+    background-image: url('../images/img/home3.jpg');
     background-size: cover;
     background-position: center;
   }

@@ -2,17 +2,21 @@ from .models import *
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
 
 class ClientForm(ModelForm):
     class Meta:
         model = Client
-        fields = ['profile_pic']
-
-class ClientAlterForm(ModelForm):
-    class Meta:
-        model = Client
         fields = '__all__'
+        exclude = ['user']
 
+    birth = forms.DateField(
+        widget=forms.DateInput(format='%d/%m/%Y', attrs={'class': 'datepicker'}))
 
 class ContractForm(ModelForm):
     class Meta:

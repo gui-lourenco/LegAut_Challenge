@@ -1,7 +1,8 @@
 {% extends 'core/userBase.html' %}
 {% load static %}
-{% block title %} {{user.name}} {% endblock %}
-{% block user %} {{user.name}} {% endblock %}
+{% block title %} {{client.name}} {% endblock %}
+{% block root %} {% url 'core:user' user=client.user.username %} {% endblock %}
+{% block user %} {{client.name}} {% endblock %}
 {% block page %}
 <div class="container"></div>
     <table class="table table-striped">

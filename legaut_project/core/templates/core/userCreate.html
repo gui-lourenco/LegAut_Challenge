@@ -4,21 +4,9 @@
 
 {% block user %} {{username.first_name}} {% endblock %}
 {% block head %}
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
-<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<!-- <link rel="dns-prefetch" href="https://fonts.gstatic.com"> -->
-<!-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css"> -->
-<!-- <link rel="icon" href="Favicon.png"> -->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> -->
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<!-- <link href="{% static '/css/userCreate.css' %}" rel="stylesheet" id="bootstrap-css"> -->
 <script src="{% static 'media/js/userCreate.js' %}"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 {% endblock %}
 
 {% block form %} Adições de contratos devem ser 
@@ -36,59 +24,59 @@ feitas apenas na página principal {% endblock %}
                             <form name="my-form" onsubmit="return validform()" action="" enctype="multipart/form-data" method="POST">
                                 {% csrf_token %}
                                 <!-- Nome -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Nome</label>
                                     <div class="col-md-6">
                                         <input type="text" id="name" class="form-control" name="name">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- CPF -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="CPF" class="col-md-4 col-form-label text-md-right">CPF</label>
                                     <div class="col-md-3">
                                         <input type="text" id="CPF" class="form-control" name="cpf">
-                                    </div>
+                                    </div> -->
 
                                     <!-- RG -->
-                                    <label for="RG" class="col-form-label text-md-right ml-5">R.G.</label>
+                                    <!-- <label for="RG" class="col-form-label text-md-right ml-5">R.G.</label>
                                     <div class="col-md-2 ml-4">
                                         <input type="text" id="RG" class="form-control" name="rg">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Endereço -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="present_address" class="col-md-4 col-form-label text-md-right">Endereço</label>
                                     <div class="col-md-6">
                                         <input type="text" id="present_address" class="form-control" name=end>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Email -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
                                     <div class="col-md-6">
                                         <input type="text" id="email" class="form-control" name="email">
                                     </div>
                                 </div>
-
+ -->
                                 <!-- Telefone -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="phone_number" class="col-md-4 col-form-label text-md-right">Contato</label>
                                     <div class="col-md-2">
                                         <input type="text" id="phone_number" class="form-control" name=tel>
-                                    </div>
+                                    </div> -->
 
                                     <!-- Data de Nascimento -->
-                                    <label for="birth" class="col-form-label text-md-right ml-5">Data de Nascimento</label>
+                                    <!-- <label for="birth" class="col-form-label text-md-right ml-5">Data de Nascimento</label>
                                     <div class="col-md-2 ml-3">
                                         <input class="form-control" type="date" value="2011-08-19" id="birth" name="birth">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Senha -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="pswd" class="col-md-4 col-form-label text-md-right">Senha</label>
                                     <div class="col-md-2">
                                         <input type="password" id="pswd" class="form-control" name="password1">
@@ -98,22 +86,22 @@ feitas apenas na página principal {% endblock %}
                                     <div class="col-md-2 ml-3">
                                         <input type="password" id="pswd2" class="form-control" name="password2">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- Confirmação Senha -->
-                                <div class="form-group row">
+                                <!-- <div class="form-group row"> -->
                                     <!-- sexo  -->
-                                    <label for="sex" class="col-md-4 col-form-label text-md-right">Sexo</label>
+                                    <!-- <label for="sex" class="col-md-4 col-form-label text-md-right">Sexo</label>
                                     <div class="col-md-1">
                                         <select id="Sex" name="sex" class="form-control">
                                             <option selected>-</option>
                                             <option>M</option>
                                             <option>F</option>
                                           </select>
-                                    </div>
+                                    </div> -->
                                     
                                     <!-- Estado civil -->
-                                    <label for="status" class="col-form-label text-md-right">Estado Civil</label>
+                                    <!-- <label for="status" class="col-form-label text-md-right">Estado Civil</label>
                                     <div class="col-md-2">
                                         <select id="status" name="status" class="form-control">
                                             <option selected>-</option>
@@ -122,17 +110,26 @@ feitas apenas na página principal {% endblock %}
                                             <option>Viúvo(a)</option>
                                             <option>Divorciado(a)</option>
                                           </select>
-                                    </div>
+                                    </div> -->
 
-                                    <label for="pic" class="col-form-label text-md-right">Foto</label>
+                                    <!-- <label for="pic" class="col-form-label text-md-right">Foto</label>
                                     <div class="col-md-2">
                                         {{form.profile_pic}}
                                     </div>
+                                </div> -->
+                                {% for field in form %}
+                                <div class="fieldWrapper">
+                                    {{ field.errors }}
+                                    {{ field.label_tag }} {{ field }}
+                                    {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
                                 </div>
-
+                                {% endfor %}
+                            
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-secondary">
-                                        Cadastrar
+                                        Próximo
                                         </button>
                                     </div>
                                 </div>

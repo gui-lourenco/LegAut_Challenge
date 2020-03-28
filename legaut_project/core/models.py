@@ -1,19 +1,27 @@
 from django.db import models
-# from legaut_project.settings import FILE_ROOT
 from django.contrib.auth.models import User
+
+SEX_CHOICES = (
+    (1, ("Masculino")),
+    (2, ("Feminino")))
+
+STATUS_CHOICES = (
+    (1,'Solteiro(a)'),
+    (2,'Casado(a)'),
+    (3,'Viúvo(a)'),
+    (4,'Divorciado(a)'))
 
 class Client(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    cpf = models.CharField(max_length=11, unique=True)
     rg = models.CharField(max_length=9)
     birth = models.DateField(null=True)
     address = models.CharField(max_length=200)
     phone = models.CharField(max_length=15)
-    email = models.CharField(max_length=150)
-    sex = models.CharField(max_length=1, null=True)
-    marital_status = models.CharField(max_length=20, null=True)
-    profile_pic = models.ImageField(null=True, blank=True, upload_to='images')
+    email = models.EmailField()
+    sex = models.IntegerField(null=True, choices=SEX_CHOICES)
+    marital_status = models.IntegerField(null=True, choices=STATUS_CHOICES)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to='images/profiles')
 
     def __str__(self):
         return self.name

@@ -28,7 +28,8 @@ feitas apenas na página principal {% endblock %}
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="btn-group-vertical float-sm-right">
-                                <button type="button" class="btn btn-light"><a href="{% url 'core:userSettings' user=user %}">Alterar</a></button>
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:managerSettings' user=user info='user' %}">Alterar login</a></button>
+                                <button type="button" class="btn btn-light"><a href="{% url 'core:managerSettings' user=user info='client' %}">Alterar cadastro</a></button>
                                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#del"">Excluir</button>
                             </div> 
                             
@@ -37,7 +38,7 @@ feitas apenas na página principal {% endblock %}
                                     {% if user.client.profile_pic %}
                                     <img src="{{user.client.profile_pic.url}}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     {% else %}
-                                    <img src="{% static 'media/images/profile-default-pic.png' %}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                    <img src="{% static 'media/images/img/profile-default-pic.png' %}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     {% endif %}
                                 </div>
                                 <div class="userData ml-3">
@@ -70,7 +71,7 @@ feitas apenas na página principal {% endblock %}
                                                 <label style="font-weight:bold;">CPF</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                                {{user.client.cpf}}
+                                                {{user.username}}
                                             </div>
                                         </div>
                                         <hr />

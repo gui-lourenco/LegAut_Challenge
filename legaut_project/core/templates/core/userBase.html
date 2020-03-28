@@ -15,8 +15,8 @@
         <header>
             {% block header %}
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #7c94aa">
-                <a class="navbar-brand" href="{% url 'core:user' %}">
-                    <img style="width: 120px; height: 70px" src="{% static '/images/final.png' %}" alt="LegAut">
+                <a class="navbar-brand" href="{% block root %}{% endblock %}">
+                    <img style="width: 120px; height: 70px" src="{% static 'media/images/img/final.png' %}" alt="LegAut">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
                     <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,11 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav my-2 my-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'core:userSettings' user=request.user %}">Alterar Cadastro</a>
+                            <a class="nav-link" href="{% url 'core:userSettings' user=request.user info='user' %}">Alterar Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'core:userSettings' user=request.user info='client' %}">Alterar Cadastro</a>
                         </li>
 
                         <li class="nav-item">

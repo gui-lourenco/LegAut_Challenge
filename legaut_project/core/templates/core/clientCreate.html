@@ -18,42 +18,139 @@ feitas apenas na página principal {% endblock %}
     <div class="cotainer">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header">Cadastro</div>
+                <div class="card">
+                    <div class="card-header">Cadastro</div>
                         <div class="card-body">
-                            <form name="my-form" onsubmit="return validform()" action="" enctype="multipart/form-data" method="POST">
+                            <form enctype="multipart/form-data" method="POST">
                                 {% csrf_token %}
-
-                                {% for field in form %}
-                                <div class="fieldWrapper">
-                                    {{ field.errors }}
-                                    {{ field.label_tag }} {{ field }}
-                                    {% if field.help_text %}
-                                    <p class="help">{{ field.help_text|safe }}</p>
-                                    {% endif %}
-                                </div>
-                                {% endfor %}
-                            
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-secondary">
-                                        Finalizar
-                                        </button>
+                                
+                                <!-- Nome -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Nome</label>
+                                    <div class="col-md-3">
+                                        {{ form.name }}
+                                        {{ form.name.errors }}
+                                        {% if form.name.help_text %}
+                                        <p class="help">{{ form.name.help_text|safe }}</p>
+                                        {% endif %}
                                     </div>
                                 </div>
-                            </form>
 
-                            {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
+                                <!-- RG -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">RG</label>
+                                    <div class="col-md-3">
+                                        {{ form.rg }}
+                                        {{ form.rg.errors }}
+                                        {% if form.rg.help_text %}
+                                        <p class="help">{{ form.rg.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Data de Nascimento -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Data de Nasc.</label>
+                                    <div class="col-md-3">
+                                        {{ form.birth }}
+                                        {{ form.birth.errors }}
+                                        {% if form.birth.help_text %}
+                                        <p class="help">{{ form.birth.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Endereço -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">End</label>
+                                    <div class="col-md-3">
+                                        {{ form.address }}
+                                        {{ form.address.errors }}
+                                        {% if form.address.help_text %}
+                                        <p class="help">{{ form.address.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Tel</label>
+                                    <div class="col-md-3">
+                                        {{ form.phone }}
+                                        {{ form.phone.errors }}
+                                        {% if form.phone.help_text %}
+                                        <p class="help">{{ form.phone.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Email</label>
+                                    <div class="col-md-3">
+                                        {{ form.email }}
+                                        {{ form.email.errors }}
+                                        {% if form.email.help_text %}
+                                        <p class="help">{{ form.email.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                        
+                                <!-- Sexo -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Sexo</label>
+                                    <div class="col-md-3">
+                                        {{ form.sex }}
+                                        {{ form.sex.errors }}
+                                        {% if form.sex.help_text %}
+                                        <p class="help">{{ form.sex.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Estado Civil -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Estado Civil</label>
+                                    <div class="col-md-3">
+                                        {{ form.marital_status }}
+                                        {{ form.marital_status.errors }}
+                                        {% if form.marital_status.help_text %}
+                                        <p class="help">{{ form.marital_status.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Foto -->
+                                <div class="form-group">
+                                    <label class="col-form-label text-md-right">Foto</label>
+                                    <div class="col-md-3">
+                                        {{ form.profile_pic }}
+                                        {{ form.profile_pic.errors }}
+                                        {% if form.profile_pic.help_text %}
+                                        <p class="help">{{ form.profile_pic.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-secondary">
+                                        Finalizar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
+
+                        <!-- {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %} -->
                     </div>
+                </div>
             </div>
         </div>
     </div>
-
 </main>
 {% endblock %}

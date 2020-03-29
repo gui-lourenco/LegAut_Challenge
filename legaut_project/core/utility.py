@@ -9,7 +9,11 @@ import os
 
 def userDelete(user):
     user = User.objects.get(username=user)
-    os.remove(user.client.profile_pic.path)
+    try:
+        os.remove(user.client.profile_pic.path)
+    except ValueError:
+        pass
+    
     for cont in user.client.contract_set.all():
         os.remove(cont.file.path)
 

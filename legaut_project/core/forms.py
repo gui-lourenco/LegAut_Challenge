@@ -14,9 +14,9 @@ class ClientForm(ModelForm):
         model = Client
         fields = '__all__'
         exclude = ['user']
-
-    birth = forms.DateField(
-        widget=forms.DateInput(format='%d/%m/%Y', attrs={'class': 'datepicker'}))
+        widgets = {
+            'birth': forms.DateInput(format='%d/%m/%Y')
+        }
 
 class ContractForm(ModelForm):
     class Meta:

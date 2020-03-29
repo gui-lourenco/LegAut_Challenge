@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import *
 from .forms import *
 from .utility import *
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 import os
 
@@ -60,7 +59,7 @@ def userCreatePage(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            return redirect('core:clientCreate', username=user.username, password=user.password)
+            return redirect('core:clientCreate', user=user.username, password=user.password)
 
         else:
             messages.error(request, form.errors)
@@ -71,20 +70,20 @@ def userCreatePage(request):
     return render(request, 'core/userCreate.html', context)
 
 @login_required(login_url='core:login')
-def clientCreatePage(request, username, password):
+def clientCreatePage(request, user, password):
     if request.method == 'POST':
-        new_user = User(username=username, password=password)
+        new_user = User(username=user, password=password)
         client = Client(user=new_user)
         form = ClientForm(request.POST, request.FILES, instance=client)
         if form.is_valid():
             new_user.save()
             form.save()
-            messages.success(request, 'Cadastro realizado com sucesso!')
+            # messages.success(request, 'Cadastro realizado com sucesso!')
             return redirect('core:manager')
 
         else:
             messages.error(request, form.errors)
-            return redirect('core:clientCreate', username=username, password=password)
+            return redirect('core:clientCreate', username=user, password=password)
 
     form = ClientForm()
     context = {'form':form, "username":request.user}
@@ -105,9 +104,9 @@ def userSettingsPage(request, user, info):
         return render(request, 'core/userSettings.html', context)
 
     elif info == 'client':
-        form = ClientForm(instance=user)
+        form = ClientForm(instance=user.client)
         if request.method == 'POST':
-            form = ClientForm(request.POST, request.FILES, instance=user)
+            form = ClientForm(request.POST, request.FILES, instance=user.client)
             if form.is_valid():
                 form.save()
                 return redirect('core:user', user.username)
@@ -132,7 +131,7 @@ def managerSettingsPage(request, user, info):
     elif info == 'client':
         form = ClientForm(instance=user.client)
         if request.method == 'POST':
-            form = ClientForm(request.POST, request.FILES, instance=user)
+            form = ClientForm(request.POST, request.FILES, instance=user.client)
             if form.is_valid():
                 form.save()
                 return redirect('core:manager')
